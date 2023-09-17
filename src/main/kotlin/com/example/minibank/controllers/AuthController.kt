@@ -57,6 +57,7 @@ class AuthController(private val userService: UserService) {
             .setIssuer(issuer)
             .setExpiration(Date(System.currentTimeMillis() + 60 + 24 + 1000))
 //            .signWith("secret", SignatureAlgorithm.ES512)  // Реализация требует объекта Key, TODO
+            .signWith(SignatureAlgorithm.HS256, "secretsecretsecretsecretsecretsecretsecretsecret")
             .compact()
 
         val cookie = Cookie("jwt", jwt)
