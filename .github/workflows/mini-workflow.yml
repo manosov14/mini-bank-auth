@@ -1,0 +1,30 @@
+name: mini-workflow JAVA CI with gradle
+'on':
+  push:
+    branches:
+      - master
+      - main
+      - develop
+  pull_request:
+    branches:
+      - master
+      - main
+      - develop
+  workflow_dispatch: null
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install JDK 1.8
+        run: actions/setup-java@v3
+          java-version: 11
+      - name: Setup Gradle
+         uses: gradle/gradle-build-action@v2
+      - name: Execute Gradle build
+         run: ./gradlew build
+   lint:      
+     steps:
+       - name: ktlint
+        uses: block42-blockchain-company/ktlint-action@master
