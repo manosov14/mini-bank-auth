@@ -28,6 +28,10 @@ jobs:
         run: gradle/gradle-build-action@v2
       - name: Execute Gradle build
         run: ./gradlew build
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+      - name: Build with Gradle
+        run: ./gradlew build
   lint:
     runs-on: ubuntu-latest
     steps:
