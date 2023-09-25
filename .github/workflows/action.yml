@@ -37,10 +37,10 @@ jobs:
 #        with:
 #          arguments: build
 
-#      - name: Setup Gradle
-#        uses: ./gradlew/gradle-build-action@v2
-#      - name: install dependencies
-#        uses: ./gradlew --console plain dependencies
+      - name: Setup Gradle
+        uses: ./gradlew/gradle-build-action@v2
+      - name: install dependencies
+        uses: ./gradlew --console plain dependencies
       - name: Execute Gradle build
         run: ./gradlew build
 
