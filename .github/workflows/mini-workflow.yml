@@ -36,10 +36,9 @@ jobs:
 #        uses: gradle/gradle-build-action@749f47bda3e44aa060e82d7b3ef7e40d953bd629
 #        with:
 #          arguments: build
-      - name: Checkout source
-        uses: actions/checkout@v3
-      - name: Setup Gradle
-        uses: ./gradlew/gradle-build-action@v2
+
+#      - name: Setup Gradle
+#        uses: ./gradlew/gradle-build-action@v2
       - name: install dependencies
         uses: ./gradlew --console plain dependencies
       - name: Execute Gradle build
