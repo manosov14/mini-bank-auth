@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.springframework.boot") version "3.1.3"
+    id("org.springframework.boot") version "2.7.15"
     id("io.spring.dependency-management") version "1.1.3"
     kotlin("jvm") version "1.8.22"
     kotlin("plugin.spring") version "1.8.22"
@@ -17,10 +17,6 @@ java {
 
 repositories {
     mavenCentral()
-    google()
-    maven {
-        url = uri("https://repo1.maven.org/maven2/")
-    }
 }
 
  dependencies {
