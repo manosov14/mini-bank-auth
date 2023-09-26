@@ -33,43 +33,19 @@ jobs:
         uses: gradle/gradle-build-action@v2
       - name: Execute Gradle build
         run: ./gradlew --no-daemon clean build
-#      - name: Run the Gradle package task
-#        uses: gradle/gradle-build-action@749f47bda3e44aa060e82d7b3ef7e40d953bd629
-#        with:
-#          arguments: -b ci.gradle package
-#      - name: Run the Gradle package task
-#        uses: gradle/gradle-build-action@749f47bda3e44aa060e82d7b3ef7e40d953bd629
-#        with:
-#          arguments: build
 
-#      - name: Setup Gradle
-#        uses: ./gradlew/gradle-build-action@v2
-#      - name: install dependencies
-#        uses: ./gradlew --console plain dependencies
-#      - name: Execute Gradle build
-#        run: ./gradlew build
-
-
-#      - name: Grant execute permission for gradlew
-#        run: chmod +x gradlew
-#      - name: Build with Gradle
-#        run: ./gradlew build
-
-
-#      - name: Build with Gradle
-#        uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25 # v2.6.0
-#        with:
-#          arguments: build
-#      - name: Validate Gradle wrapper matches official SHA-256 checksums for security
-#        uses: gradle/wrapper-validation-action@v1
-#      - name: Grant execute permission for gradlew
-#        run: chmod +x gradlew
-#      - name: Build with Gradle
-#        run: ./gradlew build -D, --refresh-dependencies
-      #run: ./gradlew bootJar
-  #      uses: eskatos/gradle-command-action@v1
-   #     with:
-    #      gradle-version: current
+  sonarcloud:
+    name: SonarCloud
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.G_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   lint:
     runs-on: ubuntu-latest
