@@ -52,3 +52,5 @@ jobs:
     steps:
       - name: ktlint
         uses: block42-blockchain-company/ktlint-action@master
+      - name: "ktlint"
+        uses: "vroy/gha-kotlin-linter@v1"
