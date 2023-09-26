@@ -52,5 +52,12 @@ jobs:
     steps:
       - name: ktlint
         uses: block42-blockchain-company/ktlint-action@master
-      - name: "ktlint"
-        uses: "vroy/gha-kotlin-linter@v1"
+
+      - name: ktlint2
+        uses: vroy/gha-kotlin-linter@v1
+
+      - name: ktlint3
+        uses: ScaCap/action-ktlint@master
+        with:
+          github_token: ${{ secrets.G_TOKEN }}
+          reporter: github-pr-review # Change reporter
