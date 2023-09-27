@@ -7,4 +7,11 @@ class LintTestClass {
     }
 
     Lint()
+
+    if a > 0 {
+
+    }
+    else {
+
+    }
 }
