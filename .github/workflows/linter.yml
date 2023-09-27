@@ -33,7 +33,7 @@ jobs:
       packages: read
       statuses: write
 
-    ##################
+
     # Load all steps #
     ##################
     steps:
