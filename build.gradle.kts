@@ -42,6 +42,10 @@ dependencies {
     implementation("io.jsonwebtoken:jjwt-jackson:0.10.6")
     implementation("io.jsonwebtoken:jjwt-impl:0.10.6")
     compileOnly ("javax.servlet:javax.servlet-api:4.0.1")
+    implementation("org.springdoc:springdoc-openapi-ui:1.6.9")
+    implementation("org.springdoc:springdoc-openapi-kotlin:1.6.9")
+//    implementation("org.springframework.boot:spring-boot-starter-validation")
+//    implementation("org.springframework.boot:spring-boot-starter-actuator")
 }
 
 tasks.withType<KotlinCompile> {

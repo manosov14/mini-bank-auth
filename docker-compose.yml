@@ -1,0 +1,12 @@
+minibank:
+  image:minibank
+container_name: minibank
+build:
+  context: .
+  dockerfile: ./Dockerfile
+networks:
+  mini-bank_new:
+ports:
+  - 8000:8000
+restart: unless-stopped
+
