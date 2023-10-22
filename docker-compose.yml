@@ -1,17 +1,19 @@
-version: '3.1'
+version: '3.5'
 services:
-  app:
-    container_name: springboot-postgresql
-    image: springboot-app
-    build:
-      context: ./
-      dockerfile: Dockerfile
+
+  nginx:
+    container_name: nginx
+    image: nginx
     ports:
-      - "8000:8000"
-    depends_on:
-      - postgresqldb
-  postgresqldb:
-    image: postgres
+      - "80:80"
+    networks:
+      - network1
+#        ipv4_address: 172.16.0.2
+    restart: unless-stopped
+
+  user-db:
+    container_name: user-db
+    image: user-db
     build:
       context: ./
       dockerfile: Dockerfile.postgres
@@ -21,3 +23,32 @@ services:
       - PGDATA=/var/lib/postgresql/data
       - POSTGRES_PASSWORD=123456
       - POSTGRES_USER=user
+    networks:
+      - network1
+#        ipv4_address: 172.16.0.3
+    restart: unless-stopped
+
+  user-app:
+    container_name: user-app
+    image: user-app
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    depends_on:
+      - user-db
+    networks:
+      - network1
+#        ipv4_address: 172.16.0.4
+#    restart: unless-stopped
+
+
+networks:
+  network1:
+    name: network1
+    driver: bridge
+#    ipam:
+#      config:
+#        - subnet: 172.16.0.0/16
+#          gateway: 172.16.0.1
