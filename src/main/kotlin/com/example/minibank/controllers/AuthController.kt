@@ -18,7 +18,7 @@ import javax.servlet.http.Cookie
 import javax.servlet.http.HttpServletResponse
 
 @RestController
-@RequestMapping("api")
+@RequestMapping("/api/v1/")
 @ConditionalOnProperty(prefix = "feature.toggles", name = ["register"], havingValue = "true")
 @Tag(
     name = "Пользователи",
@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletResponse
 class AuthController(private val userService: UserService) {
 
 
-    @PostMapping("register")
+    @PostMapping("/user")
     @Operation(summary = "Регистрация пользователя")
     fun register(@RequestBody body: UserDTO): ResponseEntity<Any> {
 
@@ -50,7 +50,7 @@ class AuthController(private val userService: UserService) {
         }
     }
 
-    @PostMapping("login")
+    @PostMapping("/auth")
     fun login(@RequestBody body: UserDTO, response: HttpServletResponse): ResponseEntity<Any> {
         val user = this.userService.findByEmail(body.email)
             ?: return ResponseEntity.badRequest().body(Message("user not found"))
@@ -85,7 +85,7 @@ class AuthController(private val userService: UserService) {
         return ResponseEntity.ok(Message("success"))
     }
 
-    @GetMapping("user")
+    @GetMapping("/user")
     fun getUser(@CookieValue("jwt") jwt: String?): ResponseEntity<Any> {
         try {
             if (jwt == null) {
@@ -104,13 +104,13 @@ class AuthController(private val userService: UserService) {
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("user/{id}")
     fun delete(@CookieValue("jwt") jwt: String?, @PathVariable id: Int): ResponseEntity<Any> {
         return userService.deleteUser(id)
     }
 
 
-    @PutMapping("/{id}")
+    @PutMapping("user/{id}")
     fun updateUser(@PathVariable id: Int, @RequestBody user: UserDTO) {
         userService.updateUser(id, user)
     }

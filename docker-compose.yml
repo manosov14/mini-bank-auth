@@ -1,14 +1,36 @@
-version: '3.5'
+version: '3.9'
 services:
 
   nginx:
+    image: nginx:1.25.2-alpine
     container_name: nginx
-    image: nginx
+    volumes:
+      - /var/log/nginx:/var/log/nginx
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+   #   - ./nginx/index.html:/etc/nginx/index.html
+      - ./nginx/conf.d:/etc/nginx/conf.d
     ports:
       - "80:80"
+    hostname: nginx
     networks:
       - network1
-#        ipv4_address: 172.16.0.2
+    depends_on:
+      - user-app
+      - user-db
+    restart: unless-stopped
+
+  user-app:
+    container_name: user-app
+    image: user-app
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    depends_on:
+      - user-db
+    networks:
+      - network1
     restart: unless-stopped
 
   user-db:
@@ -25,30 +47,10 @@ services:
       - POSTGRES_USER=user
     networks:
       - network1
-#        ipv4_address: 172.16.0.3
     restart: unless-stopped
-
-  user-app:
-    container_name: user-app
-    image: user-app
-    build:
-      context: ./
-      dockerfile: Dockerfile
-    ports:
-      - "8000:8000"
-    depends_on:
-      - user-db
-    networks:
-      - network1
-#        ipv4_address: 172.16.0.4
-#    restart: unless-stopped
 
 
 networks:
   network1:
     name: network1
     driver: bridge
-#    ipam:
-#      config:
-#        - subnet: 172.16.0.0/16
-#          gateway: 172.16.0.1
