@@ -24,7 +24,6 @@ class UserService(
         } catch (e: Exception) {
             return ResponseEntity.ok(Message("User with id $id not found"))
         }
-
     }
 
     @Transactional
@@ -37,7 +36,6 @@ class UserService(
         existingUser.email = user.email
         existingUser.password = user.password
         userRepository.save(existingUser)
-
     }
 
     fun findByEmail(email: String): User? {
@@ -47,5 +45,4 @@ class UserService(
     fun getById(id: Int): User {
         return this.userRepository.getById(id) // TODO Заменить на актуальный метод
     }
-
 }

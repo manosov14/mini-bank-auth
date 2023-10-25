@@ -7,6 +7,7 @@ plugins {
     kotlin("jvm") version "1.8.22"
     kotlin("plugin.spring") version "1.8.22"
     kotlin("plugin.jpa") version "1.8.22"
+    id("org.jlleitschuh.gradle.ktlint") version "11.0.0"
 }
 
 group = "com.example"
@@ -34,24 +35,33 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-jdbc")
     implementation("org.springframework.security:spring-security-web")
     implementation("org.springframework.security:spring-security-config")
-    testImplementation ("org.junit.jupiter:junit-jupiter-api:5.8.1")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
     testImplementation("org.junit.jupiter:junit-jupiter:5.4.2")
-    testRuntimeOnly ("org.junit.jupiter:junit-jupiter-engine:5.8.1")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.1")
     testImplementation("io.mockk:mockk:1.9.3")
     implementation("io.jsonwebtoken:jjwt-api:0.10.6")
     implementation("io.jsonwebtoken:jjwt-jackson:0.10.6")
     implementation("io.jsonwebtoken:jjwt-impl:0.10.6")
-    compileOnly ("javax.servlet:javax.servlet-api:4.0.1")
+    compileOnly("javax.servlet:javax.servlet-api:4.0.1")
     implementation("org.springdoc:springdoc-openapi-ui:1.6.9")
     implementation("org.springdoc:springdoc-openapi-kotlin:1.6.9")
-//    implementation("org.springframework.boot:spring-boot-starter-validation")
-//    implementation("org.springframework.boot:spring-boot-starter-actuator")
+    implementation("com.pinterest:ktlint:0.38.0")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0")
 }
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {
         freeCompilerArgs += "-Xjsr305=strict"
         jvmTarget = "11"
+    }
+}
+
+ktlint {
+    android = false
+    ignoreFailures = true
+
+    reporters {
     }
 }
 
