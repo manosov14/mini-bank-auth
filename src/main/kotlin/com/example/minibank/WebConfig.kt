@@ -5,7 +5,6 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry
 import org.springframework.web.servlet.config.annotation.EnableWebMvc
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 
-
 @Configuration
 @EnableWebMvc
 
@@ -15,6 +14,5 @@ class WebConfig : WebMvcConfigurer {
         registry.addMapping("/**")
             .allowedOrigins("http://localhost:3000", "http://localhost:8000", " http://localhost:4200")
             .allowCredentials(true)
-
     }
 }
