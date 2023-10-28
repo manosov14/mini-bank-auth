@@ -1,11 +1,6 @@
 name: CI
 on:
-  workflow_dispatch:
-    inputs:
-      reason:
-        description: "manual run"
-        required: true
-        default: ""
+  workflow_dispatch: null
   push:
     branches:
       - main
