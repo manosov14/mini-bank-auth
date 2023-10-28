@@ -8,7 +8,7 @@ import org.mockito.junit.jupiter.MockitoExtension
 @ExtendWith(MockitoExtension::class)
 abstract class BaseTest {
 
-    protected fun userDTO(): UserDTO {
+    protected fun createUserDTO(): UserDTO {
         val body = UserDTO()
         body.name = "M"
         body.email = "m@email.example"
@@ -16,7 +16,7 @@ abstract class BaseTest {
         return body
     }
 
-    protected fun user(): User {
+    protected fun createUser(): User {
         val user = User()
         user.name = "M"
         user.email = "m@email.example"

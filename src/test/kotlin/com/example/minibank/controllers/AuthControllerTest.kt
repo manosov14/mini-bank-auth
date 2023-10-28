@@ -28,13 +28,14 @@ class AuthControllerTest : BaseTest() {
         Assertions.assertEquals(200, register.statusCode.value())
     }
 
-//    @Test
-//    fun login() {
-//        val body = UserDTO()
-//        whenever(userService.findByEmail(any())).thenReturn(User())
-//        val login = subj.login(body, MockHttpServletResponse())
-//        Assertions.assertEquals(200, login.statusCode.value())
-//    }
+    @Test
+    fun login() {
+        val body = createUserDTO()
+
+        whenever(userService.findByEmail(any())).thenReturn(createUser())
+        val login = subj.login(body, MockHttpServletResponse())
+        Assertions.assertEquals(200, login.statusCode.value())
+    }
 
     @Test
     fun login_invalidPassword() {
