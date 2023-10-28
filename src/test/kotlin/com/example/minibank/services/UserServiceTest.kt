@@ -33,7 +33,7 @@ class UserServiceTest : BaseTest() {
 
     @Test
     fun getById() {
-        whenever(userRepository.getById(any())).thenReturn(user())
+        whenever(userRepository.getById(any())).thenReturn(createUser())
         val byId = subj.getById(1)
         Assertions.assertNotNull(byId)
     }
