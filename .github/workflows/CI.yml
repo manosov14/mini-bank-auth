@@ -27,7 +27,6 @@ jobs:
           github_token: ${{ secrets.G_TOKEN }}
           reporter: github-pr-review # Change reporter
   test:
-    needs: sonarcloud
     name: Unit test
     runs-on: ubuntu-20.04
     steps:
@@ -36,7 +35,6 @@ jobs:
       - name: Unit test runner
         uses: emilyseville7cfg-better-emacs/unit-test-runner@v1.1
   sonarcloud:
-     needs: lint
      name: SonarCloud
      runs-on: ubuntu-latest
      steps:
@@ -49,7 +47,6 @@ jobs:
            GITHUB_TOKEN: ${{ secrets.G_TOKEN }}
            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
   build:
-    needs: sonarcloud
     name: build app
     runs-on: ubuntu-latest
     steps:
