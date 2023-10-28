@@ -18,13 +18,6 @@ java {
     sourceCompatibility = JavaVersion.VERSION_11
 }
 
-sonar {
-    properties {
-        property("sonar.projectKey", "manosov14_mini-bank")
-        property("sonar.organization", "manosov")
-        property("sonar.host.url", "https://sonarcloud.io")
-    }
-}
 
 repositories {
     mavenCentral()
