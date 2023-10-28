@@ -20,10 +20,10 @@ java {
 
 sonar {
     properties {
-        property("sonar.projectKey", "myProjectKey")
-        property("sonar.organization", "myOrganization")
-        property("sonar.host.url", "myHostUrl")
-        property("sonar.tests", "src/test")
+        property("sonar.projectKey", "mini-bank")
+        property("sonar.projectName", "mini-bank")
+        property("sonar.projectVersion", "1.0.0")
+        property("sonar.organization", "mini-bank")
     }
 }
 
