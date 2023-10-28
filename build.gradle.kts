@@ -8,6 +8,7 @@ plugins {
     kotlin("plugin.spring") version "1.8.22"
     kotlin("plugin.jpa") version "1.8.22"
     id("org.jlleitschuh.gradle.ktlint") version "11.0.0"
+    id("org.sonarqube") version "4.3.1.3277"
 }
 
 group = "com.example"
@@ -15,6 +16,15 @@ version = "0.0.1-SNAPSHOT"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_11
+}
+
+sonar {
+    properties {
+        property("sonar.projectKey", "myProjectKey")
+        property("sonar.organization", "myOrganization")
+        property("sonar.host.url", "myHostUrl")
+        property("sonar.tests", "src/test")
+    }
 }
 
 repositories {
