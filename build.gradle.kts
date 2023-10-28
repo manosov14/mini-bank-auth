@@ -8,7 +8,7 @@ plugins {
     kotlin("plugin.spring") version "1.8.22"
     kotlin("plugin.jpa") version "1.8.22"
     id("org.jlleitschuh.gradle.ktlint") version "11.0.0"
-    id("org.sonarqube") version "4.3.1.3277"
+    id("org.sonarqube") version "4.4.1.3373"
 }
 
 group = "com.example"
@@ -20,10 +20,9 @@ java {
 
 sonar {
     properties {
-        property("sonar.projectKey", "mini-bank")
-        property("sonar.projectName", "mini-bank")
-        property("sonar.projectVersion", "1.0.0")
-        property("sonar.organization", "mini-bank")
+        property("sonar.projectKey", "manosov14_mini-bank")
+        property("sonar.organization", "manosov")
+        property("sonar.host.url", "https://sonarcloud.io")
     }
 }
 
