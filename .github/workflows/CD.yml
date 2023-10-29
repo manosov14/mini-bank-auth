@@ -1,24 +1,20 @@
 name: CD
-
 'on':
   push:
-#    tags:
-#      - "v*.*.*"
     branches:
       - main
+      - develop
       - feature/cd
-    # paths:
-    #   - './'
-    #   - 'src'
-    #   - '.github/workflows/CD*'
+  pull_request:
+    branches:
+      - main
+      - develop
+      - feature/cd
   workflow_dispatch: null
 jobs:
   build:
     name: Build and push Docker image to Dockerhub
     runs-on: ubuntu-20.04
-#    outputs:
-#      version: ${{ env.VERSION }}
-
     steps:
       # заливаем исходники
       - name: Check out code
