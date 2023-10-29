@@ -9,7 +9,7 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./nginx/conf.d:/etc/nginx/conf.d
     ports:
-      - "80:80"
+      - "50:50"
     hostname: nginx
     networks:
       - network1
@@ -25,7 +25,7 @@ services:
       context: ./
       dockerfile: Dockerfile
     ports:
-      - "8000:8000"
+      - "9000:9000"
     depends_on:
       - user-db
     networks:
