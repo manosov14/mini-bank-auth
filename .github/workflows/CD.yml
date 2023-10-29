@@ -1,6 +1,6 @@
 name: CD
 
-on:
+'on':
   push:
 #    tags:
 #      - "v*.*.*"
@@ -11,16 +11,7 @@ on:
     #   - './'
     #   - 'src'
     #   - '.github/workflows/CD*'
-  workflow_dispatch:
-    inputs:
-      reason:
-        description: "Name the reason"
-        default: "Just because"
-        required: true
-      version:
-        description: 'Docker image version'
-        required: true
-        default: 'latest'
+  workflow_dispatch: null
 jobs:
   build:
     name: Build and push Docker image to Dockerhub
@@ -59,7 +50,7 @@ jobs:
         run: ./gradlew --no-daemon clean build
 
         
-      # сбор и деплой браза в докерхаб
+      # сбор и деплой образа в докерхаб
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
       - name: Build and push
@@ -69,4 +60,3 @@ jobs:
           push: true
           tags: latest
           labels: latest
-
