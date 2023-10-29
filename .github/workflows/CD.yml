@@ -55,5 +55,5 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}:latest
-          labels: ${{ secrets.DOCKERHUB_USERNAME }}:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/user-minibank:latest
+          labels: ${{ secrets.DOCKERHUB_USERNAME }}/user-minibank:latest
