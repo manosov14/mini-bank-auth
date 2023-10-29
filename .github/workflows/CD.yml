@@ -6,10 +6,11 @@ on:
 #      - "v*.*.*"
     branches:
       - main
-    paths:
-      - './'
-      - 'src'
-      - '.github/workflows/CD*'
+      - feature/cd
+    # paths:
+    #   - './'
+    #   - 'src'
+    #   - '.github/workflows/CD*'
   workflow_dispatch:
     inputs:
       reason:
