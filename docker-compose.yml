@@ -34,12 +34,9 @@ services:
 
   user-db:
     container_name: user-db
-    image: user-db
-    build:
-      context: ./
-      dockerfile: Dockerfile.postgres
+    image: postgres:12
     ports:
-      - "5434:5434"
+      - "5432:5432"
     environment:
       - PGDATA=/var/lib/postgresql/data
       - POSTGRES_PASSWORD=123456
