@@ -32,6 +32,20 @@ services:
       - network1
     restart: unless-stopped
 
+  user-app1:
+      container_name: user-app1
+      image: manosov/user-minibank:001
+      build:
+        context: ./
+        dockerfile: Dockerfile
+      ports:
+        - "9001:9001"
+      depends_on:
+        - user-db
+      networks:
+        - network1
+      restart: unless-stopped
+
   user-db:
     container_name: user-db
     image: postgres:12
