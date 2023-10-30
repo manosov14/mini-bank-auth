@@ -39,7 +39,7 @@ services:
         context: ./
         dockerfile: Dockerfile
       ports:
-        - "9001:9001"
+        - "9001:9000"
       depends_on:
         - user-db
       networks:
