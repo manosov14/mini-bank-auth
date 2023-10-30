@@ -39,7 +39,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
     
-#      # установкаgradle и запуск сборки
+##      установкаgradle и запуск сборки
 #      - name: Make gradlew executable
 #        run: chmod +x ./gradlew
 #      - name: Validate Gradle wrapper
