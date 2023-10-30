@@ -49,4 +49,4 @@ services:
 networks:
   network1:
     name: network1
-    driver: bridge
+#    driver: bridge
