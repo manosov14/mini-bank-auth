@@ -20,7 +20,7 @@ services:
 
   user-app:
     container_name: user-app
-    image: manosov/user-minibank
+    image: manosov/user-minibank:latest
     build:
       context: ./
       dockerfile: Dockerfile
