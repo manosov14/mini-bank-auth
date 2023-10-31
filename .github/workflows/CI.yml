@@ -1,0 +1,76 @@
+name: CI
+on:
+  workflow_dispatch: null
+  push:
+    branches:
+      - main
+      - develop
+      - release/**
+      - hotfix-**
+      - feature/**
+  pull_request:
+    branches:
+      - main
+      - develop
+      - release/**
+      - hotfix-**
+      - feature/**
+jobs:
+  #Линтинг
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone repo
+        uses: actions/checkout@master
+        with:
+          fetch-depth: 1
+      - name: ktlint
+        uses: ScaCap/action-ktlint@master
+        with:
+          github_token: ${{ secrets.G_TOKEN }}
+          reporter: github-pr-review # Change reporter
+  #Запуск тестов
+  test:
+    needs: lint
+    name: Unit test
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+      - name: Unit test runner
+        uses: emilyseville7cfg-better-emacs/unit-test-runner@v1.1
+
+# TODO. sonarcloud. Требуется добавление конфигурации для корректной работы, данный шаг временно отключен.
+#  sonarcloud:
+#     name: SonarCloud
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v3
+#         with:
+#           fetch-depth: 0
+#       - name: SonarCloud Scan
+#         uses: SonarSource/sonarcloud-github-action@master
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.G_TOKEN }}
+#           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+  #Cборка проекта
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+      - name: Setup JDK 11
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'temurin'
+          java-version: '11'
+          cache: gradle
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+      - name: Validate Gradle wrapper
+        uses: gradle/wrapper-validation-action@ccb4328a959376b642e027874838f60f8e596de3
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+      - name: Execute Gradle build
+        run: ./gradlew --no-daemon clean build

@@ -1,0 +1,49 @@
+version: '3.9'
+services:
+  nginx:
+    image: nginx:1.25.2-alpine
+    container_name: user-service-nginx
+    volumes:
+      - /var/log/nginx:/var/log/nginx
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    ports:
+      - "80:80"
+    hostname: nginx
+    networks:
+      - network1
+    depends_on:
+      - user-service-app
+      - user-service-bd
+    restart: unless-stopped
+
+  user-service-app:
+      container_name: user-app
+      image: manosov/user-minibank:latest
+      build:
+        context: ./
+        dockerfile: Dockerfile_prod
+      ports:
+        - "8000:8000"
+      depends_on:
+        - user-service-bd
+      networks:
+        - network1
+      restart: unless-stopped
+
+  user-service-bd:
+    container_name: user-db
+    image: postgres:12
+    ports:
+      - "5432:5432"
+    environment:
+      - PGDATA=/var/lib/postgresql/data
+      - POSTGRES_PASSWORD=123456
+      - POSTGRES_USER=user
+    networks:
+      - network1
+    restart: unless-stopped
+
+networks:
+  network1:
+    name: network1
