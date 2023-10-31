@@ -2,8 +2,8 @@ name: CD user service
 on:
   workflow_dispatch: null
   push:
-    tags:
-      - "*.*.*"
+#    tags:
+#      - "*.*.*"
     branches:
       - main
       - develop
