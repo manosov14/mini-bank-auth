@@ -18,6 +18,9 @@ class UserServiceTest : BaseTest() {
     @Mock
     private lateinit var userRepository: UserRepository
 
+    @Mock
+    private lateinit var ftService: FTService
+
     @Test
     fun deleteUser() {
         doNothing().whenever(userRepository).deleteById(1)

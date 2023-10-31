@@ -1,0 +1,19 @@
+features:
+  userCanCreate:
+    name: "userCanCreate"
+    enabled: true
+  userCanGet:
+    name: "userCanGet"
+    enabled: true
+  userCanDelete:
+    name: "userCanDelete"
+    enabled: true
+  userCanUpdate:
+    name: "userCanUpdate"
+    enabled: true
+  userCanLogin:
+    name: "userCanLogin"
+    enabled: true
+  userCanlogout:
+    name: "userCanlogout"
+    enabled: true
