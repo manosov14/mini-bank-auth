@@ -33,9 +33,24 @@
 ## Swagger
 host://swagger-ui/index.htm
 ## CI
+### Workflow
 https://github.com/manosov14/mini-bank-auth/blob/master/.github/workflows/CI.yml
+
+| Branch  | Starus |
+|---------|--------|
+| master  | +      |
+| develop | +      |
+
+
+
 ## CD
+### Workflow
 https://github.com/manosov14/mini-bank-auth/blob/master/.github/workflows/CD.yml
+
+| Branch  | Starus |
+|---------|--------|
+| master  | +      |
+| develop | +      |
 
 ## Feature toggles
 Реализованы через  через `spring.profiles (feature-toggles)`

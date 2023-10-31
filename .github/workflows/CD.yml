@@ -1,7 +1,9 @@
-name: CD
-'on':
+name: CD user service
+on:
   workflow_dispatch: null
   push:
+    tags:
+      - "*.*.*"
     branches:
       - main
       - develop
@@ -20,7 +22,7 @@ jobs:
     name: Build and push Docker image to Dockerhub
     runs-on: ubuntu-20.04
     steps:
-      # заливаем исходники
+      # исходники
       - name: Check out code
         uses: actions/checkout@v3
 
@@ -39,16 +41,6 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
     
-##      установкаgradle и запуск сборки
-#      - name: Make gradlew executable
-#        run: chmod +x ./gradlew
-#      - name: Validate Gradle wrapper
-#        uses: gradle/wrapper-validation-action@ccb4328a959376b642e027874838f60f8e596de3
-#      - name: Setup Gradle
-#        uses: gradle/gradle-build-action@v2
-#      - name: Execute Gradle build
-#        run: ./gradlew --no-daemon clean build
-    
       # сбор и деплой образа в dockerhub
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
@@ -60,3 +52,20 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/user-minibank:latest
           labels: ${{ secrets.DOCKERHUB_USERNAME }}/user-minibank:latest
+
+  deploy:
+    needs: build
+    name: Deploy
+    runs-on: ubuntu-20.04
+
+    # соединение по SSH, загрузка образа на хостинг
+    steps:
+      - name: SSH connect
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.SSH_SERVER_IP }}
+          username: ${{ secrets.SSH_SERVER_USER }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          script: |
+            docker rmi -f manosov/accounts-minibank
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/accounts-minibank:latest
