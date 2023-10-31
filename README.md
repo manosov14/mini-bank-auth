@@ -57,11 +57,11 @@ https://github.com/manosov14/mini-bank-auth/blob/master/.github/workflows/CD.yml
 Значения настраиваются в `./resources/application-feature-toggles.yml`
 
 ## API
-| Method | API (/api/v1) | FT | Auth (JWT) | Description |
-| --- | --- | --- | --- | --- |
+| Method | API (/api/v1) | FT                       | Auth (JWT) | Description |
+| --- | --- |--------------------------| --- | --- |
 | `POST` | `/user` | `features.userCanCreate` | \+ | Create user |
 | `PUT` | `/user/{id}` | `features.userCanUpdate` | \+ | Update user |
-| `GET` | `/user` | `features` | \+ | Get user |
+| `GET` | `/user` | `features.userCanGet`    | \+ | Get user |
 | `DELETE` | `/user/{id}` | `features.userCanDelete` | \+ | Delete user |
-| `POST` | `/login` | `features.userCanLogin` | \+ | Login user. jwt release |
+| `POST` | `/login` | `features.userCanLogin`  | \+ | Login user. jwt release |
 | `POST` | `/logout` | `features.userCanDelete` | \+ | Logo user. jwt kill |
